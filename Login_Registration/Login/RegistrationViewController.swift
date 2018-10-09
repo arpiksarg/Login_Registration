@@ -17,11 +17,12 @@ class RegistrationViewController: UIViewController {
     
     @IBAction func backToLogin() {
         let vc = storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.setViewControllers([vc], animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     @IBAction func submitAction(_ sender: Any) {
@@ -34,13 +35,21 @@ class RegistrationViewController: UIViewController {
                 Registration.email = emailField.text!
                 Registration.password = passwordField.text!
            
-            backToLogin()
+                backToLogin()
+        } else {
+            presentAlert(firstTitle: "Password don't match!",
+                         secondTitle: "Ok",
+                         message: "Try again!")
+            }
         } else {
             presentAlert(firstTitle: "Error!",
-                         secondTitle: "Something Wrong",
+                         secondTitle: "Ok",
                          message: "Please fill in all fields")
-            }
         }
     }
     
+    @IBAction func backgroudTapAction(_ sender: UITapGestureRecognizer) {
+        usernameField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+    }
 }

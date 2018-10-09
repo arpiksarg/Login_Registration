@@ -13,7 +13,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var login: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +33,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @IBAction func signUpAction(_ sender: UIButton) {
-        
+    @IBAction func signUpAction() {
         let vc = storyboard?.instantiateViewController(withIdentifier: "RegistrationVC") as! RegistrationViewController
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.setViewControllers([vc], animated: true)
     }
     
     @IBAction func tapToLogin() {
@@ -53,13 +51,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
         if isValidUser() {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "LogoutViewController")
+            let vc = storyboard!.instantiateViewController(withIdentifier: "LogoutViewController")
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            self.presentAlert(firstTitle: "Something wrong!",
-                              secondTitle: "Ok",
-                              message: "Invalid username or password")
+            presentAlert(firstTitle: "Something wrong!",
+                         secondTitle: "Ok",
+                         message: "Invalid username or password")
         }
     }
   

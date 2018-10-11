@@ -14,6 +14,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    private var isLoggedIn = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
@@ -47,6 +49,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if isValidUser() {
             let vc = storyboard!.instantiateViewController(withIdentifier: "LogoutViewController")
             navigationController?.pushViewController(vc, animated: true)
+            //isLoggedIn = true
+            //UserDefaults.standard.set(LogoutViewController(), forKey: "")
+            
         } else {
             presentAlert(firstTitle: "Something wrong!",
                          secondTitle: "Ok",
